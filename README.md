@@ -7,3 +7,4 @@
 6. Open Package Manager Console
 7. Set defoult project: Persistanece
 8. run: update-database
+9. run project on IIS Express
