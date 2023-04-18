@@ -1,0 +1,159 @@
+﻿@using Application.DTOs
+@using Domain.Common;
+@model PaginatedList<SRPUserDTO>
+@{
+    ViewData["Title"] =
+    "Użytkownicy";
+}
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+
+<div class="d-flex justify-content-between">
+    <h4>@ViewData["Title"]</h4>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end m-0">
+            @if (Model.HasPreviousPage)
+            {
+                <li class="page-item @prevDisabled">
+                    <a asp-action="Index"
+                   asp-route-pageNumber="1"
+                       class="btn btn-outline-custom">
+                        &lt;&lt;
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a asp-action="Index"
+                   asp-route-pageNumber="@(Model.PageNumber -1)"
+                       class="btn btn-outline-custom">
+                        @(Model.PageNumber - 1)
+                    </a>
+                </li>
+            }
+            <li class="page-item">
+                <a asp-action="Index"
+                   asp-route-pageNumber="@Model.PageNumber"
+                   class="btn btn-custom">
+                    @Model.PageNumber
+                </a>
+            </li>
+            @if (Model.HasNextPage)
+            {
+                <li class="page-item">
+                    <a asp-action="Index"
+                   asp-route-pageNumber="@(Model.PageNumber +1)"
+                       class="btn btn-outline-custom">
+                        @(
+                            Model.PageNumber + 1
+                            )
+                    </a>
+                </li>
+
+                <li class="page-item @nextDisabled">
+                    <a asp-action="Index"
+                   asp-route-pageNumber="@Model.TotalPages"
+                       class="btn btn-outline-custom">
+                        >>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+<hr />
+
+
+
+<form asp-action="Search" method="post">
+    <div class="input-group mb-3">
+        <button class="btn btn-outline-custom" type="submit">Szukaj</button>
+        <input name="query" class="form-control" placeholder="...">
+    </div>
+</form>
+
+<table class="table text-white table-responsive">
+    <thead>
+        <tr>
+            <th scope="col">Imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Numer Kadrowy</th>
+            <th scope="col">Departament</th>
+            <th scope="col">Wydział</th>
+            <th scope="col">Status</th>
+            <th scope="col">Akcje</th>
+        </tr>
+    </thead>
+    <tbody class="elements">
+        @foreach (var userDto in Model)
+        {
+
+            string statusClass;
+            switch (@userDto.Status)
+            {
+                case Status.Aktywny:
+                    statusClass = "success";
+                    break;
+                case Status.Zablokowany:
+                    statusClass = "danger";
+                    break;
+                case Status.Niepotwierdzony:
+                    statusClass = "secondary";
+                    break;
+                default:
+                    statusClass = "success";
+                    throw new ArgumentOutOfRangeException();
+            }
+            <tr>
+                <td>@userDto.FirstName</td>
+                <td>@userDto.LastName</td>
+                <td>@userDto.UserName</td>
+                <td>
+                    <span class="badge bg-@statusClass">@userDto.Status</span>
+          
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-custom dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Zarządzaj
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item" asp-controller="Users" asp-action="Details" asp-route-id="@userDto.Id">Szczegóły</a>
+                            </li>
+                            <li>
+                                @switch (userDto.Status)
+                                {
+                                    case Status.Aktywny:
+                                        <a class="dropdown-item" asp-controller="Users" asp-action="LockoutUser" asp-route-id="@userDto.Id">Zablokuj</a>
+                                        break;
+                                    case Status.Zablokowany:
+                                        <a class="dropdown-item" asp-controller="Users" asp-action="UnlockUser" asp-route-id="@userDto.Id">Odblokuj</a>
+                                        break;
+                                    case Status.Niepotwierdzony:
+                                        <a class="dropdown-item" asp-controller="Users" asp-action="Confirm" asp-route-id="@userDto.Id">Potwierdź</a>
+                                        break;
+                                    default:
+                                        <a class="dropdown-item" asp-controller="Users" asp-action="LockoutUser" asp-route-id="@userDto.Id">Zablokuj</a>
+                                        break;
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts
+    {
+    <script src="~/js/ManagerSearchBar.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            ManagerSearchBar.init();
+        });
+    </script>
+    }

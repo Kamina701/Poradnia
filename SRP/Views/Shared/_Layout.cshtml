@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Poradnia</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-inverse ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo1.png" />
+                </a>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">O Nas</a>
+                            <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">Specjaliści</a>
+                            <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">Warsztaty</a>
+                            <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">Profilaktyka</a>
+                            <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">Cennik</a>
+                            <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+                @if (User.Identity.Name == null)
+                {
+                    <li class="navbar-brand float-right ">
+                        <a class="btn btn-outline-warning" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </li>
+                }
+                else
+                {
+
+                    <div class="name-job custom-name">
+                        <a  class="btn btn-outline-warning profile_name">Witaj @User.Identity.Name!</a>
+                    </div>
+
+                    <div class="btn-group dropleft btn-profil">
+                        <button type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Profil
+                        </button>
+                        <div class="dropdown-menu">
+
+                            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Profile" data-bs-toggle="tooltip" data-bs-placement="top" title="Mój profil">Mój profil</a>
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Home/Index" method="post">
+                                <button class="dropdown-item" type="submit" style="border:none;background:none;" data-bs-toggle="tooltip" data-bs-placement="top" title="Wyloguj się">Wyloguj się</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+<footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
