@@ -1,4 +1,7 @@
-﻿a.navbar-brand {
+﻿body {
+  width: 100vw; }
+
+a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all; }
@@ -45,10 +48,6 @@ html {
   position: relative;
   min-height: 100%; }
 
-body {
-  /* Margin bottom by footer height */
-  padding-top: 1px; }
-
 .footer {
   position: absolute;
   bottom: 0;
@@ -58,8 +57,8 @@ body {
   /* Vertically center the text there */ }
 
 .navbar-inverse {
-  background-color: darkgrey;
-  opacity: 0.9;
+  background-color: black;
+  opacity: 0.7;
   border-color: black; }
 
 .btn-profil {
@@ -68,29 +67,10 @@ body {
 .custom-name {
   padding: 6px 10px; }
 
-/*.slide-image {
-    width: 100%;
-}
+.carousel slide {
+  width: 100vw; }
 
-.carousel-holder {
-    margin-bottom: 30px;
-}
-
-.carousel-control,
-.item {
-    border-radius: 4px;
-}
-
-.caption {
-    height: 130px;
-    overflow: hidden;
-}
-
-    .caption h4 {
-        white-space: nowrap;
-    }
-
-.thumbnail img {
-    width: 100%;
-}
-*/
+.card-style {
+  border: none;
+  margin-left: 4px;
+  margin-right: 4px; }
