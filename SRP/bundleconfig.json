@@ -1,0 +1,33 @@
+[
+ 
+  {
+    "outputFileName": "wwwroot/js/AccessController.min.js",
+    "inputFiles": [
+      "wwwroot/js/AccessController.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/notificationController.min.js",
+    "inputFiles": [
+      "wwwroot/js/notificationController.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/sidebar.min.js",
+    "inputFiles": [
+      "wwwroot/js/sidebar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/PartialController.min.js",
+    "inputFiles": [
+      "wwwroot/js/PartialController.js"
+    ]
+  }
+]

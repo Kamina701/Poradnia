@@ -1,0 +1,96 @@
+﻿@using Application.CQRS.Reports.Queries;
+@model IList<ReportDto>
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (User.IsInRole("Admin"))
+{
+    <h2>Wszystkie zgłoszenia</h2>
+}
+else
+{
+    <h2>Moje zgłoszenia</h2>
+}
+
+<table class="table text-white">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            @if (User.IsInRole("Admin"))
+            {
+
+                <th>
+                    Zgłaszający
+                </th>
+            }
+            <th>
+                Status
+            </th>
+            <th>
+                Typ
+            </th>
+            <th>
+                Treść
+            </th>
+            <th>
+                Zarzadzaj
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            string statusClass;
+            switch (@Model[i].Status)
+            {
+                case Domain.Entities.Autitables.Status.Nowe:
+                    statusClass = "success";
+                    break;
+                case Domain.Entities.Autitables.Status.Otwarte:
+                    statusClass = "warning";
+                    break;
+                case Domain.Entities.Autitables.Status.Zakończone:
+                    statusClass = "danger";
+                    break;
+                default:
+                    statusClass = "success";
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            <tr>
+                <td>
+                    @(i + 1)
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+
+                    <th>
+                        @await Component.InvokeAsync("Username", new{id=@Model[i].Author})
+                    </th>
+                }
+                <td>
+                    <span class="badge bg-@statusClass">@Model[i].Status</span>
+                </td>
+                <td>
+                    @Model[i].Type
+                </td>
+                <td class="col-5">
+                    @Model[i].Message
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Reports" asp-route-id="@Model[i].Id" type="submit" class="btn btn-outline-custom">Szczegóły</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+
+</table>
+
+<div>
+    <a class="btn btn-outline-custom" href="##" onclick="history.go(-1)">Powrót</a>
+</div>
+

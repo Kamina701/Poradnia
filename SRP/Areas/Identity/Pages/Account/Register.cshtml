@@ -1,0 +1,47 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Rejestracja";
+}
+<div class="text-center registerDiv">
+    <img src="/images/Logo1.png.png" class="d-block mx-auto" height="96" width="96" />
+    <h4 class="m-4"><strong>@ViewData["Title"]</strong></h4>
+
+    <form id="account" method="post">
+        <div class="mb-2">
+            <label asp-for="Input.Username" class="form-label"></label>
+            <input asp-for="Input.Username" class="form-control p-2" placeholder="WAR000000"/>
+            <span asp-validation-for="Input.Username" class="text-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="Input.FirstName" class="form-label"></label>
+            <input asp-for="Input.FirstName" class="form-control p-2"/>
+            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="Input.LastName" class="form-label"></label>
+            <input asp-for="Input.LastName" class="form-control p-2"/>
+            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="Input.Password" class="form-label"></label>
+            <input asp-for="Input.Password" class="form-control  p-2"/>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="Input.ConfirmPassword" class="form-label"></label>
+            <input asp-for="Input.ConfirmPassword" class="form-control  p-2"/>
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="d-grid gap-2 mb-4 mt-5">
+            <button type="submit" class="btn btn-outline-custom buttonLogin">Załóż konto</button>
+        </div>
+        <p class="text-end mb-0">
+            <i class="fa-solid fa-arrow-left-long"></i> <a class="text-info" asp-page="./Login">Zaloguj się.</a>
+        </p>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/registerController.js" asp-append-version="true"></script>
+}
