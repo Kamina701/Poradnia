@@ -1,4 +1,8 @@
 ﻿
+body{
+    width:100vw;
+}
+
 
 a.navbar-brand {
     white-space: normal;
@@ -59,10 +63,6 @@ html {
     min-height: 100%;
 }
 
-body {
-    /* Margin bottom by footer height */
-    padding-top: 1px;
-}
 
 .footer {
     position: absolute;
@@ -72,10 +72,9 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 
-
 .navbar-inverse {
-    background-color: darkgrey;
-    opacity: 0.9;
+    background-color: black;
+    opacity: 0.7;
     border-color: black;
 }
 
@@ -87,29 +86,11 @@ body {
     padding: 6px 10px;
 }
 
-/*.slide-image {
-    width: 100%;
+.carousel slide{
+    width:100vw;
 }
-
-.carousel-holder {
-    margin-bottom: 30px;
+.card-style {
+    border: none;
+    margin-left:4px;
+    margin-right:4px;
 }
-
-.carousel-control,
-.item {
-    border-radius: 4px;
-}
-
-.caption {
-    height: 130px;
-    overflow: hidden;
-}
-
-    .caption h4 {
-        white-space: nowrap;
-    }
-
-.thumbnail img {
-    width: 100%;
-}
-*/
