@@ -119,6 +119,8 @@ namespace Identity.Service
                     continue;
                 if (_currentUserService.Role == "Admin" && role.Name == "Admin" && !await _userManager.IsInRoleAsync(currentUser, "SuperAdmin"))
                     continue;
+                if(_currentUserService.Role == "Doctor" && role.Name == "Doctor")
+                    continue;
                 if (await _userManager.IsInRoleAsync(user, role.Name))
                 {
                     userWithRolesList.Add(new AddRoleToUser(role.Name, true));

@@ -1,4 +1,5 @@
-﻿using Application.Contracts.Persistance;
+﻿using Application.Contracts;
+using Application.Contracts.Persistance;
 using Application.CQRS;
 using AutoMapper;
 using Domain.Entities.Autitables;
@@ -16,16 +17,18 @@ namespace Application.CQRS.Reports.Queries
     public class GetReportsHandler : IRequestHandler<GetReportsQuery, IList<ReportDto>>
     {
         private readonly IAsyncRepository<Report> _reportRepository;
+        private readonly ICurrentUserService _currentUserService;
         private readonly IMapper _mapper;
 
-        public GetReportsHandler(IMapper mapper, IAsyncRepository<Report> reportRepository)
+        public GetReportsHandler(IMapper mapper, IAsyncRepository<Report> reportRepository, ICurrentUserService currentUserService )
         {
             _reportRepository = reportRepository;
+            _currentUserService = currentUserService;
             _mapper = mapper;
         }
         public async Task<IList<ReportDto>> Handle(GetReportsQuery request, CancellationToken cancellationToken)
         {
-            if (request.IsAdmin)
+            if (_currentUserService.IsAdmin || _currentUserService.Role== "SuperAdmin" || _currentUserService.Role == "Doctor")
             {
                 var allReports = await _reportRepository.GetAllAsync();
                 return _mapper.Map<IList<ReportDto>>(allReports);

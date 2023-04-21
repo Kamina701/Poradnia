@@ -12,7 +12,7 @@ using Application.DTOs;
 
 namespace SRP.Controllers
 {
-    [Authorize(Policy = "ManageUsers")]
+    //[Authorize(Policy = "Admin")]
     public class UsersController : BaseController
     {
         private readonly IUsersService _usersService;
@@ -25,7 +25,7 @@ namespace SRP.Controllers
             _context = context;
             _accessor = accessor;
         }
-        [Authorize(Roles = "Admin, SuperAdmin")]
+        [Authorize(Roles = "Admin, SuperAdmin, Doctor")]
         public async Task<IActionResult> Unconfirmed()
         {
             var am = await _usersService.GetUnconfirmedUsersAsync();

@@ -94,3 +94,11 @@ html {
     margin-left:4px;
     margin-right:4px;
 }
+
+.dropdown-item{
+    z-index:9999999999999; 
+}
+
+.container{
+    z-index:0;
+}

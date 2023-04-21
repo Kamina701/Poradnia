@@ -19,16 +19,16 @@
             {
                 <li class="page-item @prevDisabled">
                     <a asp-action="Index"
-                   asp-route-pageNumber="1"
-                       class="btn btn-outline-custom">
+                       asp-route-pageNumber="1"
+                       class="btn btn-outline">
                         &lt;&lt;
                     </a>
                 </li>
 
                 <li class="page-item">
                     <a asp-action="Index"
-                   asp-route-pageNumber="@(Model.PageNumber -1)"
-                       class="btn btn-outline-custom">
+                       asp-route-pageNumber="@(Model.PageNumber -1)"
+                       class="btn btn-outline">
                         @(Model.PageNumber - 1)
                     </a>
                 </li>
@@ -36,7 +36,7 @@
             <li class="page-item">
                 <a asp-action="Index"
                    asp-route-pageNumber="@Model.PageNumber"
-                   class="btn btn-custom">
+                   class="btn btn-outline">
                     @Model.PageNumber
                 </a>
             </li>
@@ -44,8 +44,8 @@
             {
                 <li class="page-item">
                     <a asp-action="Index"
-                   asp-route-pageNumber="@(Model.PageNumber +1)"
-                       class="btn btn-outline-custom">
+                       asp-route-pageNumber="@(Model.PageNumber +1)"
+                       class="btn btn-outline">
                         @(
                             Model.PageNumber + 1
                             )
@@ -54,8 +54,8 @@
 
                 <li class="page-item @nextDisabled">
                     <a asp-action="Index"
-                   asp-route-pageNumber="@Model.TotalPages"
-                       class="btn btn-outline-custom">
+                       asp-route-pageNumber="@Model.TotalPages"
+                       class="btn btn-outline">
                         >>
                     </a>
                 </li>
@@ -69,19 +69,17 @@
 
 <form asp-action="Search" method="post">
     <div class="input-group mb-3">
-        <button class="btn btn-outline-custom" type="submit">Szukaj</button>
+        <button class="btn btn-outline" type="submit">Szukaj</button>
         <input name="query" class="form-control" placeholder="...">
     </div>
 </form>
 
-<table class="table text-white table-responsive">
+<table class="table table-responsive">
     <thead>
         <tr>
             <th scope="col">Imię</th>
             <th scope="col">Nazwisko</th>
             <th scope="col">Numer Kadrowy</th>
-            <th scope="col">Departament</th>
-            <th scope="col">Wydział</th>
             <th scope="col">Status</th>
             <th scope="col">Akcje</th>
         </tr>
@@ -112,14 +110,14 @@
                 <td>@userDto.UserName</td>
                 <td>
                     <span class="badge bg-@statusClass">@userDto.Status</span>
-          
+
                 </td>
                 <td>
-                    <div class="dropdown">
-                        <button class="btn btn-outline-custom dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="btn-group dropleft btn-profil">
+                        <button class=" btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Zarządzaj
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
+                        <div class="dropdown-menu">
                             <li>
                                 <a class="dropdown-item" asp-controller="Users" asp-action="Details" asp-route-id="@userDto.Id">Szczegóły</a>
                             </li>
@@ -140,7 +138,7 @@
                                         break;
                                 }
                             </li>
-                        </ul>
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -148,7 +146,7 @@
     </tbody>
 </table>
 
-@section Scripts
+@*@section Scripts
     {
     <script src="~/js/ManagerSearchBar.js" asp-append-version="true"></script>
     <script>
@@ -156,4 +154,4 @@
             ManagerSearchBar.init();
         });
     </script>
-    }
+    }*@

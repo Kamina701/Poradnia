@@ -6,7 +6,7 @@
 <form asp-controller="Reports" asp-action="AddComment" method="post">
 
     <h2>Zgłoszenie</h2>
-    <table class="table text-white">
+    <table class="table">
         <thead>
             <tr>
                 <th>
@@ -32,14 +32,14 @@
     @if (@Model.Report.Comments.Any())
     {
         <h3>Odpowiedzi</h3>
-        <table class="table text-white">
+        <table class="table">
             <thead>
                 <tr>
                     <th>
                         Data
                     </th>
                     <th>
-                        Numer Kadrowy
+                        Numer Konta
                     </th>
                     <th>
                         Treść
@@ -65,7 +65,7 @@
             </tbody>
         </table>
     }
-    @if (User.IsInRole("Admin") || Model.Report.Status == Domain.Entities.Autitables.Status.Otwarte)
+    @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Doctor") || Model.Report.Status == Domain.Entities.Autitables.Status.Otwarte)
     {
         <h3>Dodaj Odpowiedź</h3>
         <input type="hidden" name="ReportId" value="@Model.Report.Id" />
@@ -73,24 +73,24 @@
         @*<span asp-validation-for="NewComment" class="text-danger"></span>*@
 
         <div>
-            <input type="submit" class="btn btn-outline-custom" value="Zapisz Odpowiedź" />
-            <a class="btn btn-outline-custom" asp-action="List">Powrót</a>
+            <input type="submit" class="btn btn-outline" value="Zapisz Odpowiedź" />
+            <a class="btn btn-outline" asp-action="List">Powrót</a>
 
         </div>
 
     }
     else
     {
-        <a class="btn btn-outline-custom" asp-action="List">Powrót</a>
+        <a class="btn btn-outline" asp-action="List">Powrót</a>
     }
 
 
 
 </form>
-@if (User.IsInRole("Admin") && Model.Report.Status != Domain.Entities.Autitables.Status.Zakończone)
+@if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Doctor") && Model.Report.Status != Domain.Entities.Autitables.Status.Zakończone)
 {
     <form asp-action="Close" asp-controller="Reports" method="post">
-        <button type="submit" class="btn btn-outline-custom">Zakończ zgłoszenie</button>
+        <button type="submit" class="btn btn-outline">Zakończ zgłoszenie</button>
         <input asp-for="@Model.Report.Id" type="hidden">
     </form>
 

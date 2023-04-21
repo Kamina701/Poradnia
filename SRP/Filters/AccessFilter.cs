@@ -56,7 +56,7 @@ namespace SRP.Filters
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            if (_currentUserService.IsAdmin)
+            if (_currentUserService.IsAdmin||_currentUserService.Role==("SuperAdmin")||_currentUserService.Role=="Doctor")
                 await next();
             var reportId = context.ActionArguments.Values.OfType<Guid>().First();
 

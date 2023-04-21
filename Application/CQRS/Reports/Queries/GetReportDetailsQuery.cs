@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Contracts.Identity;
-using Domain.Entities;
 using Application.Contracts.Persistance;
 using Domain.Entities.Autitables;
 

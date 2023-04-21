@@ -17,8 +17,8 @@ namespace Identity.Seed
                 LastName = "Nytko",
                 Email = "test@pl.pl",
                 NormalizedEmail = "TEST@PL.PL",
-                UserName = "WAR014131",
-                NormalizedUserName = "WAR014131",
+                UserName = "WAR014828",
+                NormalizedUserName = "WAR014828",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString("D")
@@ -30,6 +30,12 @@ namespace Identity.Seed
                 Id = Guid.NewGuid(),
                 Name = "Admin",
                 NormalizedName = "ADMIN"
+            };
+            var DoctorRole = new SRPRole()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Doctor",
+                NormalizedName = "DOCTOR"
             };
 
             var unfonfirmedRole = new SRPRole()
@@ -54,6 +60,7 @@ namespace Identity.Seed
 
             builder.Entity<SRPUser>().HasData(adminUser);
             builder.Entity<SRPRole>().HasData(adminRole);
+            builder.Entity<SRPRole>().HasData(DoctorRole);
             builder.Entity<SRPRole>().HasData(unfonfirmedRole);
             builder.Entity<SRPRole>().HasData(superAdminRole);
             builder.Entity<SRPUserRole>().HasData(adminUserRole);

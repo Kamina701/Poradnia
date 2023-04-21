@@ -4,7 +4,7 @@
     ViewBag.Title = "title";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (User.IsInRole("Admin"))
+@if ((User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Doctor")))
 {
     <h2>Wszystkie zgłoszenia</h2>
 }
@@ -13,13 +13,13 @@ else
     <h2>Moje zgłoszenia</h2>
 }
 
-<table class="table text-white">
+<table class="table ">
     <thead>
         <tr>
             <th>
                 ID
             </th>
-            @if (User.IsInRole("Admin"))
+            @if ((User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Doctor")))
             {
 
                 <th>
@@ -64,7 +64,7 @@ else
                 <td>
                     @(i + 1)
                 </td>
-                @if (User.IsInRole("Admin"))
+                @if ((User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Doctor")))
                 {
 
                     <th>
@@ -81,7 +81,7 @@ else
                     @Model[i].Message
                 </td>
                 <td>
-                    <a asp-action="Details" asp-controller="Reports" asp-route-id="@Model[i].Id" type="submit" class="btn btn-outline-custom">Szczegóły</a>
+                    <a asp-action="Details" asp-controller="Reports" asp-route-id="@Model[i].Id" type="submit" class="btn btn-outline">Szczegóły</a>
                 </td>
             </tr>
 
@@ -91,6 +91,6 @@ else
 </table>
 
 <div>
-    <a class="btn btn-outline-custom" href="##" onclick="history.go(-1)">Powrót</a>
+    <a class="btn btn-outline" href="##" onclick="history.go(-1)">Powrót</a>
 </div>
 

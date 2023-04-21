@@ -56,7 +56,7 @@ namespace Application.CQRS.Reports.Commands
             }
             else
             {
-                var admins = await _usersService.GetUsersInRole("Admin");
+                var admins = await _usersService.GetUsersInRole("Admin, SuperAdmin, Doctor");
                 Notification notification = Notification.UserRepliedToOpenedReport(report.Id);
                 foreach (var admin in admins)
                 {

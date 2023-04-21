@@ -19,13 +19,24 @@
                 </a>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item" >
+                        <li class="nav-item">
                             <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">O Nas</a>
                             <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">Specjaliści</a>
                             <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">Warsztaty</a>
                             <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">Profilaktyka</a>
                             <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">Cennik</a>
-                            <a class="btn btn-outline-warning" asp-area="" asp-controller="Home" asp-action="Index">Kontakt</a>
+                            <div class="btn-group btn-profil">
+                                <button type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kontakt</button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" data-bs-toggle="tooltip" data-bs-placement="top"  asp-controller="Reports" asp-action="Create">Dodaj nowe</a>
+                                    <a class="dropdown-item"  asp-controller="Reports" asp-action="List">Przeglądaj</a>
+                                </div>
+                            </div>
+                            @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Doctor"))
+                            {
+                                <a class="btn btn-outline-warning" asp-controller="Users" asp-action="Index">Użytkownicy</a>
+                            }
+
                         </li>
                     </ul>
                 </div>
@@ -39,7 +50,7 @@
                 {
 
                     <div class="name-job custom-name">
-                        <a  class="btn btn-outline-warning profile_name">Witaj @User.Identity.Name!</a>
+                        <a  class="btn btn-outline-warning profile_name">Witaj @User.Identity.Name</a>
                     </div>
 
                     <div class="btn-group dropleft btn-profil">

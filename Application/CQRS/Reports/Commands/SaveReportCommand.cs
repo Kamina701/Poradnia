@@ -49,7 +49,7 @@ namespace Application.CQRS.Reports.Commands
             };
             await _reportRepository.AddAsync(report);
 
-            var admins = await _usersService.GetUsersInRole("Admin");
+            var admins = await _usersService.GetUsersInRole("Admin, SuperAdmin, Doctor");
             Notification notification = Notification.NewReport(_currentUserService.UserName, _currentUserService.UserId);
             foreach (var admin in admins)
             {

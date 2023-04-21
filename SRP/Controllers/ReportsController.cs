@@ -63,7 +63,7 @@ namespace App.Controllers
 
         }
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, SuperAdmin, Doctor")]
         public async Task<IActionResult> Close([FromForm] CloseReportDto report)
         {
             await Mediator.Send(new FinishReportCommand(report.Id));

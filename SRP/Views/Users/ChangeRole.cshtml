@@ -10,7 +10,7 @@
 else
 {
     <form method="post" asp-action="ChangeRole" asp-controller="Users" id="form">
-        <table class="table text-white" id="table">
+        <table class="table" id="table">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -40,8 +40,8 @@ else
             }
             </tbody>
         </table>
-        <button type="submit" class="btn btn-outline-custom">Zapisz zmiany</button>
-        <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.Id" class="btn text-custom">Anuluj</a>
+        <button type="submit" class="btn btn-outline">Zapisz zmiany</button>
+        <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.Id" class="btn">Anuluj</a>
 
     </form>
 }

@@ -24,13 +24,4 @@ namespace Application.DTOs
         Zablokowany,
         Niepotwierdzony
     }
-    public class SRPUserAccessCopyDTO
-    {
-        public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string UserName { get; set; }
-        public bool CopyFrom { get; set; }
-
-    }
 }
