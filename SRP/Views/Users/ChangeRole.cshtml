@@ -1,0 +1,48 @@
+﻿@model SRP.Models.GetUserWithRolesListVm
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Uprawnienia dla: @Model.FirstName @Model.LastName - @Model.Username</h2>
+@if (Model.UserWithRoles.Count == 0)
+{
+    <div>brak ról do podziału</div>
+}
+else
+{
+    <form method="post" asp-action="ChangeRole" asp-controller="Users" id="form">
+        <table class="table" id="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Uprawnienie</th>
+                <th scope="col">Przypisz</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for (int i = 0; i < Model.UserWithRoles.Count; i++)
+            {
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@Html.DisplayFor(x => x.UserWithRoles[i].Role)</td>
+                    @Html.HiddenFor(x => x.UserWithRoles[i].Role)
+                    <td>
+                        @if (Model.UserWithRoles[i].Role != "User")
+                        {
+                            <input asp-for="UserWithRoles[i].Add" />
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(x => Model.UserWithRoles[i].Add)
+                            @Html.HiddenFor(x => Model.UserWithRoles[i].Add)
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-outline-warning">Zapisz zmiany</button>
+        <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.Id">Anuluj</a>
+
+    </form>
+}
+

@@ -1,0 +1,38 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profil użytkownika";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-lg-10 mb-6 mb-sm-8" style="float:none;margin:auto;">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center mb-4 mt-2">
+                    <i class="fa-regular fa-user fs-1"></i>
+                </h5>
+                <div class="row">
+                    <div class="col-6 text-end"><strong>Imię</strong></div>
+                    <div class="col-6">@Model.FirstName</div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-end"><strong>Nazwisko</strong></div>
+                    <div class="col-6">@Model.LastName</div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-end"><strong>Email</strong></div>
+                    <div class="col-6">@Model.Email</div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-end"><strong>Telefon</strong></div>
+                    <div class="col-6">@Model.Phone</div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <a href="/Identity/Account/Manage/ChangePassword" class="btn btn-outline-warning">Zmień hasło</a>
+                <a href="/Identity/Account/Manage/EditProfile" class="btn btn-outline-warning">Edytuj dane</a>
+            </div>
+        </div>
+    </div>
+</div>

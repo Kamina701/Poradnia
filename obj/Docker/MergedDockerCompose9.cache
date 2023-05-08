@@ -1,0 +1,12 @@
+name: dockercompose15580256439998592941
+services:
+  srp:
+    build:
+      context: C:\Users\Wojciech\source\repos\SRP
+      dockerfile: SRP/Dockerfile
+    image: srp
+    networks:
+      default: null
+networks:
+  default:
+    name: dockercompose15580256439998592941_default

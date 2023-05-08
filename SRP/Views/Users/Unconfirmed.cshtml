@@ -1,0 +1,31 @@
+﻿@model IList<SRP.Models.DTOs.SRPUserDTO>
+@{
+    ViewData["Title"] = "Użytkownicy niepotwierdzeni";
+}
+
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Email</th>
+            <th scope="col">Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var userDto in Model)
+        {
+        <tr>
+            <td>@userDto.FirstName</td>
+            <td>@userDto.LastName</td>
+            <td>@userDto.Email</td>
+            <td>
+                    <a class="btn btn-outline-warning" asp-controller="Users" asp-action="Confirm" asp-route-id="@userDto.Id">Potwierdź użytkownika</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

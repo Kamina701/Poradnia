@@ -1,0 +1,95 @@
+﻿@model SRP.Models.ReportDetails
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form asp-controller="Reports" asp-action="AddComment" method="post">
+
+    <h2>Zgłoszenie</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Data
+                </th>
+                <th>
+                    Treść
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Model.Report.Created
+                </td>
+                <td>
+                    @Model.Report.Message
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    @if (@Model.Report.Comments.Any())
+    {
+        <h3>Odpowiedzi</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Data
+                    </th>
+                    <th>
+                        Użytkownik
+                    </th>
+                    <th>
+                        Treść
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var comment in @Model.Report.Comments)
+                {
+                    <tr>
+                        <td>
+                            @comment.Created
+                        </td>
+                        <td>
+                            @await Component.InvokeAsync("Username", new { id = comment.Author })
+
+                        </td>
+                        <td>
+                            @comment.Response
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Doctor") || Model.Report.Status == SRP.Models.Enties.Status.Otwarte)
+    {
+        <h3>Dodaj Odpowiedź</h3>
+        <input type="hidden" name="ReportId" value="@Model.Report.Id" />
+        <textarea name="Message" cols="50" rows="7" id="Message"></textarea>
+
+        <div>
+            <input type="submit" class="btn btn-outline" value="Zapisz Odpowiedź" />
+            <a class="btn btn-outline" asp-action="List">Powrót</a>
+        </div>
+        <div>
+
+        </div>
+    }
+    else
+    {
+        <a class="btn btn-outline" asp-action="List">Powrót</a>
+    }
+</form>
+
+@if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Doctor") && Model.Report.Status != SRP.Models.Enties.Status.Zakończone)
+{
+    <form asp-action="Close" asp-controller="Reports" method="post">
+        <button type="submit" class="btn btn-outline">Zakończ zgłoszenie</button>
+        <input asp-for="@Model.Report.Id" type="hidden">
+    </form>
+
+}

@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using SRP.Models.DTOs;
+@inject UserManager<SRPUser> UserManager
+@model CreateReportDto
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Dodaj zgłoszenie</h2>
+<form asp-controller="Reports" asp-action="Create" method="post">
+    <div class="col-xl-6 col">
+        <div class="mb-3">
+            <label asp-for="Type" class="form-label"></label>
+            <select class="form-select" asp-for="Type" asp-items="Html.GetEnumSelectList<SRP.Models.Enties.ReportType>()">
+                <option disabled selected>Wybierz...</option>
+            </select>
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Message" class="form-label"></label>
+            <textarea asp-for="Message" class="form-control" rows="8"></textarea>
+            <span asp-validation-for="Message" class="text-danger"></span>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-warning" value="Wyślij" />
+        </div>
+    </div>
+</form>

@@ -1,0 +1,18 @@
+﻿@model SRP.Models.DTOs.SRPUserDTO
+
+
+
+@if (Model.Email != null)
+{
+	@Html.DisplayFor(x => x.Email)
+}
+
+@if (Model.FirstName != null)
+{
+	@Html.DisplayFor(x=>x.FirstName)
+}
+
+@if (Model.LastName != null)
+{
+	@Html.DisplayFor(x=>x.LastName)
+}

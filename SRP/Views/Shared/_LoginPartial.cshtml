@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SRP.Models
+
+@inject SignInManager<SRPUser> SignInManager
+@inject UserManager<SRPUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Witaj @UserManager.Users.FirstOrDefault(x=>x.UserName==UserManager.GetUserName(User)).FirstName!</a>
+    </li>
+    <li class="nav-item">
+            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-outline-warning">Wyloguj</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+            <a class="nav-link btn btn-outline-warning" id="register" asp-area="Identity" asp-page="/Account/Register">Zarejestruj się</a>
+    </li>
+    <li class="nav-item">
+            <a class="nav-link btn btn-outline-warning" id="login" asp-area="Identity" asp-page="/Account/Login">Zaloguj się</a>
+    </li>
+}
+</ul>
